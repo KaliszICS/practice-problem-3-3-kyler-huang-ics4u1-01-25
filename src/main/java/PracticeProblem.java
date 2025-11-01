@@ -1,27 +1,32 @@
-public class PracticeProblem {
+import java.util.ArrayList;
+import java.util.HashSet;
 
-	public static void main(String args[]) {
+class PracticeProblem {
 
-	}
+    public static void main(String[] args) {
+        System.out.println(perms("abc"));  
+        System.out.println(permsUnique("aab"));  
+    }
 
-	public static void q1() {
-		//Write question 1 code here
-	}
+    public static ArrayList<String> perms(String str) {
+        ArrayList<String> result = new ArrayList<>();
+        if (str.length() == 0) {
+            result.add("");
+            return result;
+        }
+        char first = str.charAt(0);
+        String remainder = str.substring(1);
+        ArrayList<String> words = perms(remainder);
+        for (String word : words) {
+            for (int i = 0; i <= word.length(); i++) {
+                result.add(word.substring(0, i) + first + word.substring(i));
+            }
+        }
+        return result;
+    }
 
-	public static void q2() {
-		//Write question 2 code here
-	}
-
-	public static void q3() {
-		//Write question 3 code here
-	}
-
-	public static void q4() {
-		//Write question 4 code here
-	}
-
-	public static void q5() {
-		//Write question 5 code here
-	}
-
+    public static ArrayList<String> permsUnique(String str) {
+        HashSet<String> set = new HashSet<>(perms(str));
+        return new ArrayList<>(set);
+    }
 }
